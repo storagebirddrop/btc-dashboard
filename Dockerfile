@@ -1,5 +1,5 @@
 # ── Stage 1: Build ────────────────────────────────────────────────────────────
-FROM node:20.19-alpine AS builder
+FROM node:25.8-alpine AS builder
 
 WORKDIR /app
 COPY package.json ./
