@@ -2,7 +2,7 @@
 set -euo pipefail
 
 echo "Pulling latest code..."
-git pull
+git pull origin main
 
 echo "Rebuilding container..."
 docker compose up --build -d
