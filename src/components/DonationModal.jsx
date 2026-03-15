@@ -17,17 +17,7 @@ export default function DonationModal({ lightning, onClose }) {
       else    { setCopyFailed(true); timeoutRef.current = setTimeout(() => setCopyFailed(false), 3000) }
     }
     try {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(lightning)
-      } else {
-        const el = document.createElement('textarea')
-        el.value = lightning
-        el.style.cssText = 'position:fixed;opacity:0'
-        document.body.appendChild(el)
-        el.select()
-        document.execCommand('copy')
-        document.body.removeChild(el)
-      }
+      await navigator.clipboard.writeText(lightning)
       finish(true)
     } catch {
       finish(false)

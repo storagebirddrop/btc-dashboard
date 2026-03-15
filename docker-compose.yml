@@ -8,8 +8,6 @@ services:
     container_name: btc-dashboard
     ports:
       - "34000:80"
-    volumes:
-      - .:/app
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:80"]

@@ -29,9 +29,15 @@ function loadCache() {
   try {
     const raw = localStorage.getItem(CACHE_KEY)
     if (!raw) return null
-    const { prices, changes, ts } = JSON.parse(raw)
-    if (Date.now() - ts > CACHE_TTL_MS) return null
-    return { prices, changes }
+    const parsed = JSON.parse(raw)
+    if (
+      typeof parsed !== 'object' || parsed === null ||
+      typeof parsed.ts !== 'number' ||
+      typeof parsed.prices !== 'object' || parsed.prices === null ||
+      typeof parsed.changes !== 'object' || parsed.changes === null
+    ) return null
+    if (Date.now() - parsed.ts > CACHE_TTL_MS) return null
+    return { prices: parsed.prices, changes: parsed.changes }
   } catch { return null }
 }
 
