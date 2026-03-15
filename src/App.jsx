@@ -10,6 +10,7 @@ import { useHistoricalReturns }           from './hooks/useHistoricalReturns.js'
 import {
   CURRENT_YEAR, FALLBACK_USD, DEFAULT_LIGHTNING,
   HALVINGS_HIST, HALVINGS_PROJ,
+  NEXT_HALVING, NEXT_HALVING_REWARD,
   HISTORICAL, ANALYSTS,
   ANALYST_LOG_MIN_USD, ANALYST_LOG_MAX_USD,
   SCENARIOS, TIER_COLORS, HALVING_DETAILS,
@@ -375,8 +376,8 @@ export default function App() {
               ))}
               <div style={{ padding: '10px 12px', background: '#f59e0b08', border: '1px solid #f59e0b22', borderRadius: 9 }}>
                 <div style={{ fontSize: 10, color: '#f59e0b88', marginBottom: 3 }}>Next halving</div>
-                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 14, color: '#f59e0b' }}>2028 ⚡</div>
-                <div style={{ fontSize: 10, color: '#6b7280' }}>Block reward → 1.5625 BTC</div>
+                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 14, color: '#f59e0b' }}>{NEXT_HALVING} ⚡</div>
+                <div style={{ fontSize: 10, color: '#6b7280' }}>Block reward → {NEXT_HALVING_REWARD} BTC</div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <div style={{ width: 12, height: 12, borderRadius: 2, background: '#6b7280', opacity: 0.45 }} />

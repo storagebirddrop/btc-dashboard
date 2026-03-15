@@ -11,6 +11,14 @@ export const HALVINGS_HIST = [2012, 2016, 2020, 2024]
 export const HALVINGS_PROJ = [2028, 2032, 2036, 2040]
 export const ALL_HALVINGS  = [...HALVINGS_HIST, ...HALVINGS_PROJ]
 
+// Next projected halving year — updates automatically as years pass
+export const NEXT_HALVING = ALL_HALVINGS.find(y => y > CURRENT_YEAR)
+
+// Block reward after NEXT_HALVING — starts at 50 BTC, halves each cycle
+// Cycle index = number of halvings that will have occurred by NEXT_HALVING
+const _halvingIndex = ALL_HALVINGS.indexOf(NEXT_HALVING)
+export const NEXT_HALVING_REWARD = (50 / Math.pow(2, _halvingIndex + 1)).toFixed(4).replace(/\.?0+$/, '')
+
 export const HALVING_DETAILS = [
   { year: 2012, pre: '$12',     post: '$1,200',  label: '1st Halving' },
   { year: 2016, pre: '$650',    post: '$20,000', label: '2nd Halving' },
