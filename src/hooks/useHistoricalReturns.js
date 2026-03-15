@@ -17,11 +17,17 @@ async function fetchYearReturn(year, signal) {
   const url = `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=usd&from=${from}&to=${to}`
   const res = await fetch(url, { signal })
   if (!res.ok) throw new Error(`HTTP ${res.status}`)
-  const { prices } = await res.json()
-  if (!prices?.length) throw new Error('no price data')
+  const data = await res.json()
+  if (
+    typeof data !== 'object' || data === null ||
+    !Array.isArray(data.prices) || data.prices.length < 2
+  ) throw new Error('unexpected API response shape')
 
-  const open  = prices[0][1]
-  const close = prices[prices.length - 1][1]
+  const open  = data.prices[0]?.[1]
+  const close = data.prices[data.prices.length - 1]?.[1]
+  if (typeof open !== 'number' || typeof close !== 'number' || open === 0) {
+    throw new Error('invalid price values')
+  }
   const ret   = Math.round(((close - open) / open) * 100)
   return { year, ret, estimated: isCurrentYear }
 }

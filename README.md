@@ -11,7 +11,7 @@ Built by [@storagebirddrop](https://github.com/storagebirddrop)
 ```bash
 cp .env.example .env        # add your Lightning address (optional)
 docker compose up --build -d
-# → http://localhost:3000
+# → http://localhost:34000
 ```
 
 ---
@@ -58,12 +58,11 @@ Requires Node ≥ 20. If using nvm: `nvm use` picks up `.nvmrc` automatically.
 
 ## Docker Deployment
 
+### Standard (CLI)
+
 ```bash
 # Start
-docker compose up --build -d    # http://localhost:3000
-
-# Update after git pull
-bash scripts/deploy.sh          # pulls, rebuilds, prunes dangling images
+docker compose up --build -d    # http://localhost:34000
 
 # Logs
 docker compose logs -f
@@ -71,6 +70,16 @@ docker compose logs -f
 # Stop
 docker compose down
 ```
+
+### Dockge (TrueNAS Scale / self-hosted)
+
+1. SSH into the host and run the deploy script to pull the latest code:
+   ```bash
+   bash scripts/deploy.sh
+   ```
+2. Open Dockge → select **btc-dashboard** → click **Build** then **Restart**.
+
+That's it — Dockge owns the container lifecycle, so the script only syncs the code and prunes old images. Do not run `docker compose up` manually alongside Dockge.
 
 The production image is a two-stage build — Node 25 Alpine builds the Vite bundle, Nginx 1.29 Alpine serves it. Final image has no Node runtime.
 
@@ -80,6 +89,7 @@ The production image is a two-stage build — Node 25 Alpine builds the Vite bun
 
 The bundled `nginx.conf` includes:
 
+- **HSTS** — `Strict-Transport-Security: max-age=31536000; includeSubDomains`
 - **CSP** — restricts scripts, styles, fonts, and connections to known sources (self + Google Fonts + CoinGecko)
 - **X-Frame-Options: DENY** — no iframe embedding
 - **X-Content-Type-Options: nosniff**
@@ -89,7 +99,7 @@ The bundled `nginx.conf` includes:
 - **Gzip compression** for text, CSS, JS, JSON
 - **SPA fallback** — all routes return `index.html`
 
-Place a reverse proxy (Caddy, Traefik, nginx) in front for HTTPS termination — the HTTP→HTTPS redirect in `nginx.conf` assumes TLS is handled upstream.
+The container serves plain HTTP on port 80. Place a reverse proxy (Caddy, Traefik, nginx) in front for HTTPS termination — TLS is handled upstream.
 
 ---
 
@@ -137,11 +147,10 @@ All configurable values live in [`src/constants.js`](src/constants.js):
 
 ## Dependency Updates
 
-Dependabot opens PRs weekly for npm and monthly for Docker base images. The CI build must pass before merging. After merging on GitHub, deploy with:
+Dependabot opens PRs weekly for npm and monthly for Docker base images. The CI build must pass before merging. After merging on GitHub:
 
-```bash
-bash scripts/deploy.sh
-```
+1. SSH into the host → `bash scripts/deploy.sh` (pulls code, prunes images)
+2. Open Dockge → **Build** → **Restart**
 
 Major version bumps (React, Vite) should be tested locally with `npm run build` before merging — they sometimes require coordinated upgrades across interdependent packages.
 
