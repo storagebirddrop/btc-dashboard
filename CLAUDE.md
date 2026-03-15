@@ -89,3 +89,43 @@ bash scripts/deploy.sh    # git pull + docker compose up --build -d + image prun
 ```
 
 See `Dockerfile`, `docker-compose.yml`, and `nginx.conf` for production config.
+
+## Agents
+
+Global agents defined in `~/.claude/` are available for use in this project:
+
+| Agent | Description |
+|---|---|
+| `coder` | Implements features exactly as specified, following existing idioms. Raises ambiguities before writing code. |
+| `debugger` | Traces root causes from stack traces/logs, proposes minimal targeted fixes, suggests preventive tests. |
+| `refactorer` | Improves readability/performance/maintainability without changing behavior. Limits to 3–5 focused suggestions. |
+| `code-reviewer` | Staff-level review: bugs, security, correctness, performance. Rates code 1–10 across four dimensions. |
+| `frontend-designer` | Layout, component design, accessibility, responsiveness. Adapts to existing CSS approach (CSS-in-JS here). |
+| `test-writer` | Writes isolated, deterministic tests. Mocks external deps (APIs, I/O). |
+| `api-designer` | REST/GraphQL schemas, auth, security, DB modeling. Outputs typed stubs and OpenAPI specs. |
+
+## MCP Servers
+
+Global MCP servers configured in `~/.claude/settings.json`:
+
+| Server | Purpose |
+|---|---|
+| `filesystem` | Local file system access |
+| `fetch` | Fetch web pages as markdown/HTML |
+| `git` | Git repository operations |
+| `github` | GitHub API (PRs, issues, repos) |
+| `sequential-thinking` | Structured multi-step reasoning |
+| `deepwiki` | Deep wiki search |
+| `context7` | Up-to-date library documentation |
+| `firecrawl` | Web scraping and crawling |
+| `figma` | Figma design file access (`figma-developer-mcp`) |
+| `playwright` | Browser automation and testing (`@playwright/mcp`) |
+| `alpaca` | Alpaca paper trading API |
+| `quantconnect` | QuantConnect algorithmic trading |
+| `alphavantage` | Alpha Vantage market data |
+| `composer` | Composer AI trading |
+| `graphiti` | Graphiti knowledge graph (localhost:8000) |
+| `fmp-imbenrabi` | FMP data — imbenrabi server (localhost:8082) |
+| `fmp-houtini` | FMP data — houtini package |
+| `fmp-vipbat` | FMP data — vipbat server |
+| `finance-tools` | General finance tools |
