@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - VITE_LIGHTNING_ADDRESS=${VITE_LIGHTNING_ADDRESS:-}
     container_name: btc-dashboard
     ports:
       - "34000:80"
