@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BTC 2040 Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body { background: #050508; color: #e5e7eb; font-family: 'DM Sans', sans-serif; }
+      ::-webkit-scrollbar { width: 5px; }
+      ::-webkit-scrollbar-track { background: #0a0a14; }
+      ::-webkit-scrollbar-thumb { background: #2a2a3a; border-radius: 3px; }
+      input[type=range] { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; width: 100%; }
+      input[type=range]::-webkit-slider-runnable-track { background: #1e1e30; height: 4px; border-radius: 2px; }
+      input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; background: #f59e0b; border-radius: 50%; margin-top: -6px; }
+      input[type=range]::-moz-range-track { background: #1e1e30; height: 4px; border-radius: 2px; border: none; }
+      input[type=range]::-moz-range-thumb { width: 16px; height: 16px; background: #f59e0b; border-radius: 50%; border: none; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
