@@ -2,6 +2,8 @@
 
 Bitcoin investment dashboard with live pricing, multi-currency support, DCA calculator, CAGR projections, halving cycles, portfolio modeling, and analyst forecasts.
 
+Live at **[bitcoin.monster.bucket](https://bitcoin.monster.bucket)**
+
 Built by [@storagebirddrop](https://github.com/storagebirddrop)
 
 ---
