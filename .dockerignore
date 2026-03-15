@@ -1,5 +1,11 @@
 node_modules
 dist
 .git
-*.md
+.github
+.gitignore
+.dockerignore
 .env*
+.nvmrc
+.claude
+*.md
+scripts
