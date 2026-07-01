@@ -1,5 +1,5 @@
 # ── Stage 1: Build ────────────────────────────────────────────────────────────
-FROM node:25.8-alpine AS builder
+FROM node:26.4-alpine AS builder
 
 ARG VITE_LIGHTNING_ADDRESS
 ENV VITE_LIGHTNING_ADDRESS=$VITE_LIGHTNING_ADDRESS
